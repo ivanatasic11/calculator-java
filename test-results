@@ -1,0 +1,27 @@
+ZVEŠTAJ O TESTIRANJU (TEST-RESULTS)
+==================================================
+
+1. REZULTATI CRNE KUTIJE (BLACK BOX TESTING)
+--------------------------------------------------
+Metoda: Calculate (izračunavanje kompletnih aritmetičkih izraza)
+
+* Test primer 1: Unos jednostavnog izraza "4+5"
+  - Očekivani rezultat: 9.0
+  - Ispovocirani rezultat: Program radi ispravno za proste operacije.
+
+* Test primer 2: Unos složenog izraza sa prioritetom "10+5*4+3"
+  - Očekivani rezultat: 33.0 (jer 5*4=20, pa +10 i +3)
+  - Stvarni rezultat / Propust: Kod u Calculator.java ne poseduje algoritam za parsiranje prioriteta operacija (nema proveru za množenje/deljenje pre sabiranja), već računa sleva nadesno, što daje pogrešan rezultat (10+5=15, 15*4=60, 60+3=63).
+  - STATUS: BAG (Greška u logici prioriteta računskih operacija).
+
+2. JEDINIČNI TEST (UNIT TEST)
+--------------------------------------------------
+U nastavku je predlog jediničnog testa kreiranog prema smernicama iz lekcije "Nivoi testiranja" za proveru ispravnosti osnovnog rada kalkulatora:
+
+@Test
+public void testCalculateSimpleExpression() {
+    Calculator calc = new Calculator();
+    double expected = 9.0;
+    double actual = calc.Calculate("4+5");
+    assertEquals(expected, actual, 0.001);
+}
